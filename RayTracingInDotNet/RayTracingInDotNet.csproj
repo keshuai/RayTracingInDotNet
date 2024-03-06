@@ -27,7 +27,7 @@
     <PackageReference Include="Silk.NET.Vulkan.Extensions.EXT" Version="2.11.0" />
     <PackageReference Include="Silk.NET.Vulkan.Extensions.KHR" Version="2.11.0" />
     <PackageReference Include="Silk.NET.Windowing" Version="2.11.0" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
+    <PackageReference Include="SkiaSharp" Version="2.88.7" />
   </ItemGroup>
 
   <ItemGroup>

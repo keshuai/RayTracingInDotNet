@@ -1,4 +1,4 @@
-﻿using SixLabors.ImageSharp.PixelFormats;
+﻿using SkiaSharp;
 using System;
 using System.Runtime.InteropServices;
 
@@ -11,15 +11,12 @@ namespace RayTracingInDotNet
 			// Load the texture in normal host memory.
 			int width, height, channels;
 
-			var image = SixLabors.ImageSharp.Image.Load<Rgba32>(filename);
+            using var image = SKBitmap.Decode(filename);
 			width = image.Width;
 			height = image.Height;
 			channels = 4;
 
-			if (!image.TryGetSinglePixelSpan(out Span<Rgba32> pixelSpan))
-				throw new Exception($"{nameof(Texture)}: Unable to get image pixel span.");
-
-			var pixels = MemoryMarshal.AsBytes(pixelSpan).ToArray();
+			var pixels = MemoryMarshal.AsBytes(image.GetPixelSpan()).ToArray();
 
 			return new Texture(width, height, channels, pixels);
 		}
@@ -29,17 +26,14 @@ namespace RayTracingInDotNet
 			// Load the texture in normal host memory.
 			int width, height, channels;
 
-			var image = SixLabors.ImageSharp.Image.Load<Rgba32>(data);
+            using var image = SKBitmap.Decode(data);
 			width = image.Width;
 			height = image.Height;
 			channels = 4;
 
-			if (!image.TryGetSinglePixelSpan(out Span<Rgba32> pixelSpan))
-				throw new Exception($"{nameof(Texture)}: Unable to get image pixel span.");
+            var pixels = MemoryMarshal.AsBytes(image.GetPixelSpan()).ToArray();
 
-			var pixels = MemoryMarshal.AsBytes(pixelSpan).ToArray();
-
-			return new Texture(width, height, channels, pixels);
+            return new Texture(width, height, channels, pixels);
 		}
 
 		public static Texture LoadTexture(byte[] pixels, int width, int height)
