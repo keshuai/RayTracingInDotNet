@@ -88,13 +88,13 @@ namespace RayTracingInDotNet.Vulkan
 
 			Transforms = transforms.ToArray();
 
-			BufferUtil.CreateDeviceBuffer(api, commandPool, "Vertices", BufferUsageFlags.BufferUsageVertexBufferBit | BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit, vertices.ToArray(), out _vertexBuffer, out _vertexBufferMemory);
-			BufferUtil.CreateDeviceBuffer(api, commandPool, "Indices", BufferUsageFlags.BufferUsageIndexBufferBit | BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit, indices.ToArray(), out _indexBuffer, out _indexBufferMemory);
+			BufferUtil.CreateDeviceBuffer(api, commandPool, "Vertices", BufferUsageFlags.BufferUsageVertexBufferBit | BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit | BufferUsageFlags.BufferUsageAccelerationStructureBuildInputReadOnlyBitKhr, vertices.ToArray(), out _vertexBuffer, out _vertexBufferMemory);
+			BufferUtil.CreateDeviceBuffer(api, commandPool, "Indices", BufferUsageFlags.BufferUsageIndexBufferBit | BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit | BufferUsageFlags.BufferUsageAccelerationStructureBuildInputReadOnlyBitKhr, indices.ToArray(), out _indexBuffer, out _indexBufferMemory);
 			BufferUtil.CreateDeviceBuffer(api, commandPool, "Materials", BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit, materials.ToArray(), out _materialBuffer, out _materialBufferMemory);
 			BufferUtil.CreateDeviceBuffer(api, commandPool, "Offsets", BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit, offsets.ToArray(), out _offsetBuffer, out _offsetBufferMemory);
 			BufferUtil.CreateDeviceBuffer(api, commandPool, "Transforms", BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit, Transforms, out _transformBuffer, out _transformBufferMemory);
 
-			BufferUtil.CreateDeviceBuffer(api, commandPool, "AABBs", BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit, aabbs.ToArray(), out _aabbBuffer, out _aabbBufferMemory);
+			BufferUtil.CreateDeviceBuffer(api, commandPool, "AABBs", BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit | BufferUsageFlags.BufferUsageAccelerationStructureBuildInputReadOnlyBitKhr, aabbs.ToArray(), out _aabbBuffer, out _aabbBufferMemory);
 			BufferUtil.CreateDeviceBuffer(api, commandPool, "Procedurals", BufferUsageFlags.BufferUsageStorageBufferBit | BufferUsageFlags.BufferUsageShaderDeviceAddressBit, procedurals.ToArray(), out _proceduralBuffer, out _proceduralBufferMemory);
 
 			if (procedurals.Count > 0)

@@ -492,7 +492,7 @@ namespace RayTracingInDotNet.Vulkan
 			_api.SetDebugName(_bottomBufferMemory.VkDeviceMemory.Handle, $"BLAS Memory", ObjectType.DeviceMemory);
 
 			_bottomScratchBuffer?.Dispose();
-			_bottomScratchBuffer = new Buffer(_api, total.BuildScratchSize, BufferUsageFlags.BufferUsageShaderDeviceAddressBit | BufferUsageFlags.BufferUsageAccelerationStructureStorageBitKhr);
+			_bottomScratchBuffer = new Buffer(_api, total.BuildScratchSize, BufferUsageFlags.BufferUsageShaderDeviceAddressBit | BufferUsageFlags.BufferUsageAccelerationStructureStorageBitKhr | BufferUsageFlags.BufferUsageStorageBufferBit);
 			_api.SetDebugName(_bottomScratchBuffer.VkBuffer.Handle, $"BLAS Scratch Buffer", ObjectType.Buffer);
 
 			_bottomScratchBufferMemory?.Dispose();
@@ -565,7 +565,7 @@ namespace RayTracingInDotNet.Vulkan
 			// Create and copy instances buffer (do it in a separate one-time synchronous command buffer).
 			_instancesBuffer?.Dispose();
 			_instancesBufferMemory?.Dispose();
-			BufferUtil.CreateDeviceBuffer(_api, _commandPool, "TLAS Instances", BufferUsageFlags.BufferUsageShaderDeviceAddressBit, _instances, out _instancesBuffer, out _instancesBufferMemory);
+			BufferUtil.CreateDeviceBuffer(_api, _commandPool, "TLAS Instances", BufferUsageFlags.BufferUsageShaderDeviceAddressBit | BufferUsageFlags.BufferUsageAccelerationStructureBuildInputReadOnlyBitKhr, _instances, out _instancesBuffer, out _instancesBufferMemory);
 			_api.SetDebugName(_instancesBuffer.VkBuffer.Handle, $"TLAS Instances Buffer", ObjectType.Buffer);
 			_api.SetDebugName(_instancesBufferMemory.VkDeviceMemory.Handle, $"TLAS Instances Memory", ObjectType.DeviceMemory);
 
@@ -588,7 +588,7 @@ namespace RayTracingInDotNet.Vulkan
 			_api.SetDebugName(_topBufferMemory.VkDeviceMemory.Handle, $"TLAS Memory", ObjectType.DeviceMemory);
 
 			_topScratchBuffer?.Dispose();
-			_topScratchBuffer = new Buffer(_api, total.BuildScratchSize, BufferUsageFlags.BufferUsageShaderDeviceAddressBit | BufferUsageFlags.BufferUsageAccelerationStructureStorageBitKhr);
+			_topScratchBuffer = new Buffer(_api, total.BuildScratchSize, BufferUsageFlags.BufferUsageShaderDeviceAddressBit | BufferUsageFlags.BufferUsageAccelerationStructureStorageBitKhr | BufferUsageFlags.BufferUsageStorageBufferBit);
 			_api.SetDebugName(_topScratchBuffer.VkBuffer.Handle, $"TLAS Scratch Buffer", ObjectType.Buffer);
 
 			_topScratchBufferMemory?.Dispose();
