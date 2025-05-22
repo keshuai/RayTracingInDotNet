@@ -266,7 +266,7 @@ namespace RayTracingInDotNet
 				ImGuiNET.ImGui.Text("Scene");
 				ImGuiNET.ImGui.Separator();
 				ImGuiNET.ImGui.PushItemWidth(-1);
-				ImGuiNET.ImGui.Combo("", ref _userSettings.SceneIndex, scenes.ToArray(), scenes.Count);
+				ImGuiNET.ImGui.Combo("##SceneSelector", ref _userSettings.SceneIndex, scenes.ToArray(), scenes.Count);
 				ImGuiNET.ImGui.PopItemWidth();
 				ImGuiNET.ImGui.SliderInt("Speed", ref _userSettings.Speed, 0, 100);
 				ImGuiNET.ImGui.NewLine();
